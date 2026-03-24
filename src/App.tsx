@@ -13,6 +13,14 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import StarBackground from './StarBackground';
 import About from './pages/About';
 import resumeUrl from './resume.pdf';
+
+import cert1 from './certi/hr.png';
+import cert2 from './certi/Ai.png';
+import cert3 from './certi/ui.png';
+import cert4 from './certi/jp.png';
+import cert5 from './certi/Web.jpeg';
+import cert6 from './certi/dsa.png';
+
 const PerspectiveText = ({ label }: { label: string }) => {
   return (
     <motion.div 
@@ -478,12 +486,12 @@ return (
                 >
                   <div className="flex gap-6 pr-6 w-max animate-slide-cert">
                   {Array.from({ length: 4 }).flatMap(() => [
-                    { title: 'Software Engineer Intern', issuer: 'HackerRank', year: '2025', image: "../src/certi/hr.png" },
-                    { title: 'GenAI Job Simulation', issuer: 'BCG X', year: '2025', image: "../src/certi/Ai.png" },
-                    { title: 'UI/UX Graphic Design', issuer: 'Simplilearn', year: '2025', image: "../src/certi/ui.png" },
-                    { title: 'Software Engineering Job Simulation', issuer: 'JPMorgan Chase & Co.', year: '2025', image: "../src/certi/jp.png" },
-                    { title: 'Web Hackathon', issuer: 'Coding Wise', year: '2024', image: "../src/certi/Web.jpeg" },
-                    { title: 'Basics of Data Structures and Algorithms using C++', issuer: 'Centre for Professional Enhancement', year: '2025', image: "../src/certi/dsa.png" },
+                    { title: 'Software Engineer Intern', issuer: 'HackerRank', year: '2025', image: cert1 },
+                    { title: 'GenAI Job Simulation', issuer: 'BCG X', year: '2025', image: cert2 },
+                    { title: 'UI/UX Graphic Design', issuer: 'Simplilearn', year: '2025', image: cert3 },
+                    { title: 'Software Engineering Job Simulation', issuer: 'JPMorgan Chase & Co.', year: '2025', image: cert4 },
+                    { title: 'Web Hackathon', issuer: 'Coding Wise', year: '2024', image: cert5 },
+                    { title: 'Basics of Data Structures and Algorithms using C++', issuer: 'Centre for Professional Enhancement', year: '2025', image: cert6 },
                   ]).map((cert, index) => (
                     <motion.div 
                       key={index}
