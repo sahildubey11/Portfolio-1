@@ -14,12 +14,12 @@ import StarBackground from './StarBackground';
 import About from './pages/About';
 import resumeUrl from './resume.pdf';
 
-import cert1 from './certi/hr.png';
-import cert2 from './certi/Ai.png';
-import cert3 from './certi/ui.png';
-import cert4 from './certi/jp.png';
-import cert5 from './certi/Web.jpeg';
-import cert6 from './certi/dsa.png';
+import cert1 from '../src/certi/hr.png';
+import cert2 from '../src/certi/Ai.png';
+import cert3 from '../src/certi/ui.png';
+import cert4 from '../src/certi/jp.png';
+import cert5 from '../src/certi/Web.jpeg';
+import cert6 from '../src/certi/dsa.png';
 
 const PerspectiveText = ({ label }: { label: string }) => {
   return (
