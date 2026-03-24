@@ -478,12 +478,12 @@ return (
                 >
                   <div className="flex gap-6 pr-6 w-max animate-slide-cert">
                   {Array.from({ length: 4 }).flatMap(() => [
-                    { title: 'Software Engineer Intern', issuer: 'HackerRank', year: '2025', image: "../src/Certi/hr.png" },
-                    { title: 'GenAI Job Simulation', issuer: 'BCG X', year: '2025', image: "../src/Certi/Ai.png" },
-                    { title: 'UI/UX Graphic Design', issuer: 'Simplilearn', year: '2025', image: "../src/Certi/ui.png" },
-                    { title: 'Software Engineering Job Simulation', issuer: 'JPMorgan Chase & Co.', year: '2025', image: "../src/Certi/jp.png" },
-                    { title: 'Web Hackathon', issuer: 'Coding Wise', year: '2024', image: "../src/Certi/Web.jpeg" },
-                    { title: 'Basics of Data Structures and Algorithms using C++', issuer: 'Centre for Professional Enhancement', year: '2025', image: "../src/Certi/dsa.png" },
+                    { title: 'Software Engineer Intern', issuer: 'HackerRank', year: '2025', image: "../src/certi/hr.png" },
+                    { title: 'GenAI Job Simulation', issuer: 'BCG X', year: '2025', image: "../src/certi/Ai.png" },
+                    { title: 'UI/UX Graphic Design', issuer: 'Simplilearn', year: '2025', image: "../src/certi/ui.png" },
+                    { title: 'Software Engineering Job Simulation', issuer: 'JPMorgan Chase & Co.', year: '2025', image: "../src/certi/jp.png" },
+                    { title: 'Web Hackathon', issuer: 'Coding Wise', year: '2024', image: "../src/certi/Web.jpeg" },
+                    { title: 'Basics of Data Structures and Algorithms using C++', issuer: 'Centre for Professional Enhancement', year: '2025', image: "../src/certi/dsa.png" },
                   ]).map((cert, index) => (
                     <motion.div 
                       key={index}
