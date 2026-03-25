@@ -3,15 +3,15 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, useSpring, useMotionValue, AnimatePresence } from 'framer-motion';
 import { useSmoothScroll } from './SmoothScroll';
 import { Routes, Route } from 'react-router-dom'
-import Skills from './pages/Skills';
-import Contact from './pages/Contact';
+import Skills from './pages/Skills.tsx';
+import Contact from './pages/Contact.tsx';
 import MarqueeMotion from './MarqueeMotion';
-import Projects from './pages/Projects';
-import FooterMotion from './pages/Footer';
+import Projects from './pages/Projects.tsx';
+import FooterMotion from './pages/Footer.tsx';
 
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import StarBackground from './StarBackground';
-import About from './pages/About';
+import About from './pages/About.tsx';
 import resumeUrl from './resume.pdf';
 
 import cert1 from './certi/hr.png';
