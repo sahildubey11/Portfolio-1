@@ -64,6 +64,35 @@ const PerspectiveText = ({ label }: { label: string }) => {
   );
 };
 
+const PageTransition = ({ children, isLightMode }: { children: React.ReactNode, isLightMode: boolean }) => {
+  // Scroll to the top when the new page mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <>
+      <motion.div
+        className="fixed top-0 left-0 w-screen h-screen z-[100003] pointer-events-none origin-left"
+        style={{ backgroundColor: isLightMode ? '#0a0a0a' : '#fafafa' }}
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 0 }}
+        exit={{ scaleX: 1 }}
+        transition={{ duration: 1, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="fixed top-0 left-0 w-screen h-screen z-[100003] pointer-events-none origin-right"
+        style={{ backgroundColor: isLightMode ? '#0a0a0a' : '#fafafa' }}
+        initial={{ scaleX: 1 }}
+        animate={{ scaleX: 0 }}
+        exit={{ scaleX: 0 }}
+        transition={{ duration: 1, ease: "easeInOut" }}
+      />
+      {children}
+    </>
+  );
+};
+
 function App() {
  const [isLightMode, setIsLightMode] = useState(false);
 const [ripplePos, setRipplePos] = useState({ x: 0, y: 0 });
@@ -431,9 +460,11 @@ return (
   </motion.div>
 </button>
       
-  <Routes>
+  <AnimatePresence mode="wait">
+  <Routes location={location} key={location.pathname}>
         {/* HOME PAGE ROUTE */}
         <Route path="/" element={
+          <PageTransition isLightMode={isLightMode}>
           <>
             <section className="pt-32 min-h-[98vh] flex items-center relative overflow-hidden bottom-10 " id="hero">
               <div className="absolute inset-0 bg-[radial-gradient(#00ffea_0.8px,transparent_1px)] bg-[length:40px_40px] opacity-5 pointer-events-none" />
@@ -445,12 +476,12 @@ return (
                   {displayText}<span className="animate-pulse">|</span>
                 </div>
                 <div className="flex gap-4 justify-center flex-wrap">
-                  <a href="./Projects" className="px-10 py-4 bg-white text-black rounded-2xl font-semibold text-lg"
+                  <Link to="/projects" className="px-10 py-4 bg-white text-black rounded-2xl font-semibold text-lg"
                     onMouseEnter={() => setCursorVariant("explore")}
-                    onMouseLeave={() => setCursorVariant("default")}>See my work →</a>
-                  <a href="./Contact" className="px-10 py-4 border border-white/30 rounded-2xl font-semibold text-lg hover:bg-white/10"
+                    onMouseLeave={() => setCursorVariant("default")}>See my work →</Link>
+                  <Link to="/contact" className="px-10 py-4 border border-white/30 rounded-2xl font-semibold text-lg hover:bg-white/10"
                     onMouseEnter={() => setCursorVariant("talk")}
-                    onMouseLeave={() => setCursorVariant("default")}>Let's talk</a>
+                    onMouseLeave={() => setCursorVariant("default")}>Let's talk</Link>
                 </div>
               </div>
             </section>
@@ -563,15 +594,15 @@ return (
                 <div className="md:col-span-8 flex flex-col items-end">
                   <div className="flex flex-col space-y-0 leading-none">
                     {['ABOUT', 'PROJECTS', 'CONTACT'].map((item) => (
-                      <a key={item} 
-                        href={`/${item.toLowerCase()}`} 
+                      <Link key={item} 
+                        to={`/${item.toLowerCase()}`} 
                         className={`text-7xl md:text-[10rem] font-black tracking-tighter uppercase transition-colors duration-500 ${
                           isLightMode ? 'text-neutral-600 hover:text-black' : 'text-neutral-400 hover:text-white'
                         }`}
                         onMouseEnter={() => setCursorVariant("explore")}
                         onMouseLeave={() => setCursorVariant("default")}>
                         <PerspectiveText label={item} />
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -581,6 +612,7 @@ return (
                   <FooterMotion isLightMode={isLightMode} />  
           </footer>
           </>
+          </PageTransition>
         } />
 
 
@@ -588,17 +620,18 @@ return (
 
         {/* SKILLS PAGE ROUTE */}
        
-          <Route path="/skills" element={<Skills isLightMode={isLightMode} />} />
-          <Route path="/contact" element={<Contact isLightMode={isLightMode} 
+          <Route path="/skills" element={<PageTransition isLightMode={isLightMode}><Skills isLightMode={isLightMode} /></PageTransition>} />
+          <Route path="/contact" element={<PageTransition isLightMode={isLightMode}><Contact isLightMode={isLightMode} 
             setCursorVariant={setCursorVariant} 
-            setLeaderVariant={setLeaderVariant}/>} />
-          <Route path="/about" element={<About isLightMode={isLightMode} />} />
-          <Route path="/projects" element={<Projects isLightMode={isLightMode} 
+            setLeaderVariant={setLeaderVariant}/></PageTransition>} />
+          <Route path="/about" element={<PageTransition isLightMode={isLightMode}><About isLightMode={isLightMode} /></PageTransition>} />
+          <Route path="/projects" element={<PageTransition isLightMode={isLightMode}><Projects isLightMode={isLightMode} 
             setCursorVariant={setCursorVariant} 
-            setLeaderVariant={setLeaderVariant}/>} />
+            setLeaderVariant={setLeaderVariant}/></PageTransition>} />
           
         
       </Routes>
+  </AnimatePresence>
 
       {/* THE FOLLOWER (The Dot/Spotlight that trails) */}
       <motion.div
