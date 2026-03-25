@@ -20,7 +20,7 @@ export default function About({ isLightMode }: AboutProps) {
 
   return (
     <div className={`min-h-screen flex flex-col relative overflow-hidden transition-colors duration-1000 ${
-      isLightMode ? 'bg-neutral-50 text-black' : 'bg-transparent text-white'
+      isLightMode ? 'bg-transparent text-black' : 'bg-transparent text-white'
     }`}>
       <StarBackground isLightMode={isLightMode} />
       
@@ -37,15 +37,15 @@ export default function About({ isLightMode }: AboutProps) {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 className={`text-7xl md:text-9xl italic tracking-tighter mb-2 ${
-      isLightMode ? 'text-white' : ' text-black'
+      isLightMode ? 'text-black' : 'text-white'
     }`}
               >
                 About
               </motion.h1>
               
               <div className="text-3xl md:text-4xl font-bold flex flex-wrap gap-x-3 items-center">
-  <span className={` ${
-      isLightMode ? 'text-white' : ' text-black'
+  <span className={`${
+      isLightMode ? 'text-black' : 'text-white'
     }`}>I'm Sahil.</span>
   {/* 1. Increased h to [1.4em] for clearance 
       2. Changed min-w to fit-content or a larger value 

@@ -6,6 +6,8 @@ import FooterMotion from './Footer';
 
 interface ProjectsProps {
   isLightMode: boolean;
+  setCursorVariant: (variant: string) => void;
+  setLeaderVariant: (variant: string) => void;
 }
 
 const projects = [
@@ -78,12 +80,12 @@ const glowMap = {
   }
 };
 
-export default function Projects({ isLightMode }: ProjectsProps) {
+export default function Projects({ isLightMode, setCursorVariant, setLeaderVariant }: ProjectsProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
     <div className={`min-h-screen transition-colors duration-1000 relative isolate overflow-visible ${
-      isLightMode ? 'bg-neutral-50 text-black' : 'bg-transparent text-white'
+      isLightMode ? 'bg-transparent text-black' : 'bg-transparent text-white'
     }`}>
       
       <StarBackground isLightMode={isLightMode} />
@@ -119,8 +121,16 @@ export default function Projects({ isLightMode }: ProjectsProps) {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: i * 0.15 + 0.4, ease: "easeOut" }}
-                onMouseEnter={() => setHoveredIndex(i)}
-                onMouseLeave={() => setHoveredIndex(null)}
+                onMouseEnter={() => {
+                  setHoveredIndex(i);
+                  setCursorVariant("explore");
+                  setLeaderVariant("pointer");
+                }}
+                onMouseLeave={() => {
+                  setHoveredIndex(null);
+                  setCursorVariant("default");
+                  setLeaderVariant("arrow");
+                }}
                 className={`group relative py-10 md:py-12 px-6 md:px-8 rounded-3xl border transition-all duration-500 flex flex-col h-full ${
                   isLightMode ? `bg-white border-black/10 ${glowClass.light}` : `bg-neutral-900 border-white/10 ${glowClass.dark}`
                 } block`}

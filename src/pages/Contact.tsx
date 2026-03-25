@@ -15,7 +15,7 @@ interface ContactProps {
 export default function Contact({ isLightMode,setCursorVariant, setLeaderVariant }: ContactProps)  {
   return (
     <div className={`min-h-screen flex flex-col relative overflow-hidden transition-colors duration-1000 ${
-      isLightMode ? 'bg-neutral-50 text-black' : 'bg-transparent text-white'
+      isLightMode ? 'bg-transparent text-black' : 'bg-transparent text-white'
     }`}>
       <StarBackground isLightMode={isLightMode} />
       
@@ -31,8 +31,9 @@ export default function Contact({ isLightMode,setCursorVariant, setLeaderVariant
           <div className="space-y-12">
             <div>
               <motion.h1 
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
                 className="text-8xl md:text-9xl italic tracking-tighter mb-8"
               >
                 Connect.
@@ -61,14 +62,16 @@ export default function Contact({ isLightMode,setCursorVariant, setLeaderVariant
                 }}
                   key={i}
                   href={social.href}
-                  initial={{ opacity: 0, y: 10 }}
-                  target="_blank"             // <--- Adds the "new tab" behavior
+                  initial={{ opacity: 0, x: -20 }}
+                  target="_blank"
                   rel="noopener noreferrer"
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  className={`flex items-center gap-4 transition-colors duration-300 ${social.color} group ${isLightMode ? 'text-neutral-600' : 'text-neutral-500'}`}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.15, type: "spring", stiffness: 100 }}
+                  whileHover={{ scale: 1.05, x: 10 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`flex items-center gap-4 transition-all duration-300 ${social.color} group ${isLightMode ? 'text-neutral-600' : 'text-neutral-500'}`}
                 >
-                  <div className={`p-3 rounded-full border group-hover:border-current transition-colors ${
+                  <div className={`p-3 rounded-full border transition-all duration-500 group-hover:border-current group-hover:scale-110 group-hover:-rotate-12 ${
                     isLightMode ? 'bg-black/5 border-black/10' : 'bg-white/5 border-white/10'
                   }`}>
                     {social.icon}
@@ -89,8 +92,12 @@ export default function Contact({ isLightMode,setCursorVariant, setLeaderVariant
               isLightMode ? 'bg-white/50 border-black/10 shadow-black/5' : 'bg-white/5 border-white/10'
             }`}
           >
-            {/* Subtle glow effect behind form */}
-            <div className="absolute -z-10 top-0 right-0 w-64 h-64 bg-cyan-500/10 blur-[100px] rounded-full" />
+            {/* Animated glow effect behind form */}
+            <motion.div 
+              animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -z-10 top-10 right-10 w-72 h-72 bg-cyan-500/20 blur-[100px] rounded-full pointer-events-none" 
+            />
             
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -150,10 +157,10 @@ export default function Contact({ isLightMode,setCursorVariant, setLeaderVariant
                 }}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-lg shadow-cyan-500/20"
+                className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-cyan-500/20 group"
               >
               
-                <Send className="w-5 h-5" />
+                <Send className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:rotate-12" />
                 Send Message
               </motion.button>
             </form>

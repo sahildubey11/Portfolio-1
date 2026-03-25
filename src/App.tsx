@@ -592,8 +592,10 @@ return (
           <Route path="/contact" element={<Contact isLightMode={isLightMode} 
             setCursorVariant={setCursorVariant} 
             setLeaderVariant={setLeaderVariant}/>} />
-          <Route path="/about" element={<About />} />
-          <Route path="/projects" element={<Projects isLightMode={isLightMode} />} />
+          <Route path="/about" element={<About isLightMode={isLightMode} />} />
+          <Route path="/projects" element={<Projects isLightMode={isLightMode} 
+            setCursorVariant={setCursorVariant} 
+            setLeaderVariant={setLeaderVariant}/>} />
           
         
       </Routes>

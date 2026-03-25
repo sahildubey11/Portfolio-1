@@ -124,6 +124,20 @@ function FloatingBackgroundIcons({ isLightMode }: { isLightMode: boolean }) {
   );
 }
 
+// Helper function to reliably fetch icons and bypass adblockers
+const getIconSrc = (slug: string, isLightMode: boolean) => {
+  if (slug === 'amazonaws') {
+    // Use the official Wikimedia Commons SVG source to bypass adblockers & ensure fill colors exist
+    return 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg';
+  }
+  if (slug === 'visualstudiocode') {
+    // Base64 SVG of VS Code to prevent any broken external URLs
+    return 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTIzLjE1IDIuNTg3TDE4LjIxLjIxYTEuNDk0IDEuNDk0IDAgMCAwLTEuNzA1LjI5bC05LjQ2IDguNjMtNC4xMi0zLjEyOGEuOTk5Ljk5OSAwIDAgMC0xLjI3Ni4wNTdMLjMyNyA3LjI2MUExIDEgMCAwIDAgLjMyNiA4Ljc0TDMuODk5IDEyIC4zMjYgMTUuMjZhMSAxIDAgMCAwIC4wMDEgMS40NzlMMS42NSAxNy45NGEuOTk5Ljk5OSAwIDAgMCAxLjI3Ni4wNTdsNC4xMi0zLjEyOCA5LjQ2IDguNjNhMS40OTIgMS40OTIgMCAwIDAgMS43MDQuMjlsNC45NDItMi4zNzdBMS41IDEuNSAwIDAgMCAyNCAyMC4wNlYzLjkzOWExLjUgMS41IDAgMCAwLS44NS0xLjM1MnptLTUuMTQ2IDE0Ljg2MUwxMC44MjYgMTJsNy4xNzgtNS40NDh2MTAuODk2eiIgZmlsbD0iIzAwN0FDQyIvPjwvc3ZnPg==';
+  }
+  const needsWhite = !isLightMode && ['framer', 'threedotjs', 'shadcnui', 'express', 'prisma', 'resend'].includes(slug);
+  return `https://cdn.simpleicons.org/${slug}${needsWhite ? '/white' : ''}`;
+};
+
 export default function Skills({ isLightMode }: SkillsProps) { // Accept the prop here
   const skillCategories = [
     {
@@ -156,7 +170,7 @@ export default function Skills({ isLightMode }: SkillsProps) { // Accept the pro
         { name: "Prisma", slug: "prisma" },
         { name: "Docker", slug: "docker" },
         { name: "Git", slug: "git" },
-        { name: "AWS", slug: "amazonwebservices" },
+        { name: "AWS", slug: "amazonaws" },
       ]
     },
     {
@@ -175,7 +189,7 @@ export default function Skills({ isLightMode }: SkillsProps) { // Accept the pro
   return (
    <div className={`min-h-screen flex flex-col transition-colors duration-1000 relative isolate overflow-hidden ${
     // Use bg-transparent in dark mode to let stars show through
-    isLightMode ? 'bg-neutral-50 text-black' : 'bg-transparent text-white'
+    isLightMode ? 'bg-transparent text-black' : 'bg-transparent text-white'
   }`}>
       
       <StarBackground isLightMode={isLightMode} />
@@ -294,9 +308,9 @@ export default function Skills({ isLightMode }: SkillsProps) { // Accept the pro
                           isLightMode ? 'bg-black/5 group-hover/icon:bg-white group-hover/icon:shadow-[0_0_20px_rgba(0,0,0,0.05)]' : 'bg-white/5 group-hover/icon:bg-neutral-800 group-hover/icon:shadow-[0_0_20px_rgba(255,255,255,0.05)]'
                         } border border-transparent group-hover/icon:border-current ${theme.text} ${theme.hoverText}`}>
                           <img 
-                            src={`https://cdn.simpleicons.org/${skill.slug}${!isLightMode && ['framer', 'threedotjs', 'shadcnui', 'express', 'prisma', 'amazonwebservices', 'resend'].includes(skill.slug) ? '/white' : ''}`} 
+                            src={getIconSrc(skill.slug, isLightMode)} 
                             alt={skill.name} 
-                            className="w-6 h-6 lg:w-8 lg:h-8 object-contain transition-transform duration-300 group-hover/icon:scale-110" 
+                            className={`w-6 h-6 lg:w-8 lg:h-8 object-contain transition-transform duration-300 group-hover/icon:scale-110 ${!isLightMode && skill.slug === 'amazonaws' ? 'brightness-0 invert' : ''}`}
                           />
                         </motion.div>
                         <span className={`text-xs font-bold uppercase tracking-widest transition-colors ${
