@@ -105,7 +105,7 @@ export default function Contact({ isLightMode,setCursorVariant, setLeaderVariant
                   <label className="text-sm font-semibold text-cyan-400 uppercase tracking-wider ml-1">Name</label>
                   <input 
                     type="text" 
-                    placeholder="John Doe" 
+                    placeholder="Your Name" 
                     className={`w-full border rounded-xl px-4 py-4 focus:outline-none focus:border-cyan-400/50 transition-colors ${
                       isLightMode ? 'bg-white/50 border-black/10 placeholder:text-neutral-400 text-black focus:bg-white' : 'bg-white/5 border-white/10 placeholder:text-neutral-600 text-white'
                     }`}
@@ -115,7 +115,7 @@ export default function Contact({ isLightMode,setCursorVariant, setLeaderVariant
                   <label className="text-sm font-semibold text-cyan-400 uppercase tracking-wider ml-1">Email</label>
                   <input 
                     type="email" 
-                    placeholder="john@example.com" 
+                    placeholder="Your@example.com" 
                     className={`w-full border rounded-xl px-4 py-4 focus:outline-none focus:border-cyan-400/50 transition-colors ${
                       isLightMode ? 'bg-white/50 border-black/10 placeholder:text-neutral-400 text-black focus:bg-white' : 'bg-white/5 border-white/10 placeholder:text-neutral-600 text-white'
                     }`}
